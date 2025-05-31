@@ -42,7 +42,7 @@ header p {
 
 .game-container {
   display: grid;
-  grid-template-columns: repeat(20, 60px);
+  grid-template-columns: repeat(20, 30px);
   grid-template-rows: repeat(20, 30px);
   gap: 1px;
   width: fit-content;

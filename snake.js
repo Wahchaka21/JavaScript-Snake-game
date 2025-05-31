@@ -5,19 +5,51 @@ const gameContainer = document.querySelector(".game-container");
 document.addEventListener("keydown", function (event) {
   switch (event.key) {
     case "ArrowUp":
+      if (direction.y === 0) direction = { x: 0, y: -1 };
       break;
     case "ArrowDown":
+      if (direction.y === 0) direction = { x: 0, y: 1 };
       break;
     case "ArrowLeft":
+      if (direction.x === 0) direction = { x: -1, y: 0 };
       break;
     case "ArrowRight":
+      if (direction.x === 0) direction = { x: 1, y: 0 };
       break;
   }
 });
 
+let snake = [{ x: 5, y: 5 }];
+let direction = { x: 1, y: 0 };
+let gameInterval;
+
 startButton.addEventListener("click", startGame);
 
-function moveSnake() {}
+function moveSnake() {
+  const head = snake[0];
+
+  const newHead = {
+    x: head.x + direction.x,
+    y: head.y + direction.y,
+  };
+  snake.unshift(newHead);
+  snake.pop();
+  updateSnake();
+}
+
+function updateSnake() {
+  gameContainer.replaceChildren();
+
+  for (const part of snake) {
+    const pixel = document.createElement("div");
+    pixel.classList.add("snake");
+    pixel.style.gridColumnStart = part.x;
+    pixel.style.gridRowStart = part.y;
+    gameContainer.appendChild(pixel);
+  }
+}
+
+function snakeBody() {}
 
 function generateFood() {}
 
@@ -45,4 +77,7 @@ function startGame() {
   score.textContent = "Score: 0";
 
   console.log("Et paff c'est démarrer !");
+  snake;
+  direction;
+  gameInterval = setInterval(moveSnake, 200);
 }
