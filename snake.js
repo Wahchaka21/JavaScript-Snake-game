@@ -3,6 +3,7 @@ const score = document.getElementById("score");
 const gameContainer = document.querySelector(".game-container");
 
 
+
 document.addEventListener("keydown", function (event) {
   switch (event.key) {
     case "ArrowUp":
@@ -20,12 +21,20 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
+
+
 let snake = [{ x: 5, y: 5 }];
 let direction = { x: 1, y: 0 };
 let gameInterval;
 const gridSize = { cols: 20, rows: 20}
 
 startButton.addEventListener("click", startGame);
+
+
+
+//================================================================================================================
+
+
 
 
 function moveSnake() {
@@ -69,14 +78,8 @@ function moveSnake() {
 }
 
 
-restartButton.addEventListener("click", () => {
-  
-  snake = [{ x: 5, y: 5 }];
-  direction = { x: 1, y: 0 };
-  score.textContent = "Score: 0";
-  gameOverScreen.classList.add("hidden");
-  startGame();
-});
+//================================================================================================================
+
 
 function collisionMur(head) {
   return (head.x < 1 || head.x > gridSize.cols || head.y < 1 || head.y > gridSize.rows)
@@ -94,15 +97,61 @@ function updateSnake() {
   }
 }
 
+
+
+//================================================================================================================
+
+
 function eatBouffe() {}
+
+
+
+//================================================================================================================
+
+
+
+
 
 function snakeBody() {}
 
+
+
+//================================================================================================================
+
+
+
+
+
 function updateScore() {}
+
+
+
+//================================================================================================================
+
+
+
+
 
 function generateFood() {}
 
+
+
+//================================================================================================================
+
+
+
+
+
 function checkCollision() {}
+
+
+
+//================================================================================================================
+
+
+
+
+
 
 
 function startGame() {
