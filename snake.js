@@ -36,7 +36,6 @@ startButton.addEventListener("click", startGame);
 
 
 
-
 function moveSnake() {
   const head = snake[0];
 
@@ -78,7 +77,9 @@ function moveSnake() {
 }
 
 
+
 //================================================================================================================
+
 
 
 function collisionMur(head) {
@@ -100,6 +101,7 @@ function updateSnake() {
 
 
 //================================================================================================================
+
 
 
 function eatBouffe() {}
@@ -132,7 +134,7 @@ function updateScore() {}
 
 
 
-function generateFood() {}
+function generateBouffe() {}
 
 
 
@@ -142,15 +144,11 @@ function generateFood() {}
 
 
 
-function checkCollision() {}
+function siIlSeToucheCeCon() {}
 
 
 
 //================================================================================================================
-
-
-
-
 
 
 
