@@ -102,3 +102,42 @@ footer p {
   bottom: 20px;
   right: 20px;
 }
+
+.gameOver {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.gameOver h2 {
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.replay {
+  padding: 20px;
+  border-radius: 10px;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #000000;
+  border: 3px solid #ffffff;
+  transition: 0.5s;
+}
+
+.replay:hover {
+  color: #000000;
+  background-color: #ffffff;
+  transition: 0.5s;
+  cursor: pointer;
+}
