@@ -26,7 +26,9 @@ document.addEventListener("keydown", function (event) {
 let snake = [{ x: 5, y: 5 }];
 let direction = { x: 1, y: 0 };
 let gameInterval;
-const gridSize = { cols: 20, rows: 20}
+const gridSize = { cols: 20, rows: 20 };
+let food = { x: 10, y: 15 };
+let currentScore = 0;
 
 startButton.addEventListener("click", startGame);
 
@@ -44,7 +46,7 @@ function moveSnake() {
     y: head.y + direction.y,
   };
 
-  if (collisionMur(newHead)) {
+  if (collisionMur(newHead) || siIlSeToucheCeCon(newHead)) {
     clearInterval(gameInterval);
 
     const gameOver = document.createElement("div");
@@ -63,6 +65,7 @@ function moveSnake() {
       gameOver.remove();
       snake = [{ x: 5, y: 5 }];
       direction = { x: 1, y: 0 };
+      currentScore = 0;
       score.textContent = "Score: 0";
       startGame();
     });
@@ -72,8 +75,30 @@ function moveSnake() {
   }
 
   snake.unshift(newHead);
-  snake.pop();
+
+  if (newHead.x === food.x && newHead.y === food.y) {
+    updateScore();
+    generateBouffe();
+  } else {
+    snake.pop();
+  }
+
   updateSnake();
+}
+
+
+
+
+//================================================================================================================
+
+
+
+
+function collisionMur(head) {
+  return (
+    head.x < 1 || head.x > gridSize.cols ||
+    head.y < 1 || head.y > gridSize.rows
+  );
 }
 
 
@@ -82,12 +107,11 @@ function moveSnake() {
 
 
 
-function collisionMur(head) {
-  return (head.x < 1 || head.x > gridSize.cols || head.y < 1 || head.y > gridSize.rows)
-}
+
 
 function updateSnake() {
-  gameContainer.replaceChildren();
+  const oldSnakeParts = gameContainer.querySelectorAll(".snake");
+  oldSnakeParts.forEach(el => el.remove());
 
   for (const part of snake) {
     const pixel = document.createElement("div");
@@ -104,7 +128,11 @@ function updateSnake() {
 
 
 
-function eatBouffe() {}
+function updateScore() {
+  currentScore++;
+  score.textContent = "Score: " + currentScore
+}
+
 
 
 
@@ -113,8 +141,31 @@ function eatBouffe() {}
 
 
 
+function generateBouffe() {
+  let foodX;
+  let foodY;
+  let surSnake = true;
 
-function snakeBody() {}
+  while (surSnake) {
+    foodX = Math.floor(Math.random() * gridSize.cols + 1);
+    foodY = Math.floor(Math.random() * gridSize.rows + 1);
+
+    surSnake = snake.some(part => part.x === foodX && part.y === foodY);
+  }
+
+  food = { x: foodX, y: foodY };
+
+  const ancienneBouffe = document.getElementById("bouffe");
+  if (ancienneBouffe) ancienneBouffe.remove();
+
+  const bouffe = document.createElement("div");
+  bouffe.className = "bouffe";
+  bouffe.id = "bouffe";
+  bouffe.style.gridColumnStart = food.x;
+  bouffe.style.gridRowStart = food.y;
+  gameContainer.appendChild(bouffe);
+}
+
 
 
 
@@ -123,40 +174,24 @@ function snakeBody() {}
 
 
 
+function siIlSeToucheCeCon(newHead) {
+  return snake.some(part => part.x === newHead.x && part.y === newHead.y);
+}
 
-function updateScore() {}
 
 
 
 //================================================================================================================
 
-
-
-
-
-function generateBouffe() {}
-
-
-
-//================================================================================================================
-
-
-
-
-
-function siIlSeToucheCeCon() {}
-
-
-
-//================================================================================================================
 
 
 
 function startGame() {
-  const gameOverIsHere = document.querySelector("gameOver")
+  const gameOverIsHere = document.querySelector(".gameOver");
   if (gameOverIsHere) {
-    gameOverIsHere.remove()
+    gameOverIsHere.remove();
   }
+
   gameContainer.replaceChildren();
 
   const snakePixel = document.createElement("div");
@@ -165,16 +200,11 @@ function startGame() {
   snakePixel.style.gridRowStart = 5;
   gameContainer.appendChild(snakePixel);
 
-  const foodPixel = document.createElement("div");
-  foodPixel.classList.add("bouffe");
-  foodPixel.style.gridColumnStart = 10;
-  foodPixel.style.gridRowStart = 15;
-  gameContainer.appendChild(foodPixel);
+  generateBouffe();
 
   score.textContent = "Score: 0";
+  currentScore = 0;
 
-  console.log("Et paff c'est démarrer !");
-  snake;
-  direction;
+  //console.log("Et paff c'est démarrer !");
   gameInterval = setInterval(moveSnake, 200);
 }
