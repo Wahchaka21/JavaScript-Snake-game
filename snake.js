@@ -30,9 +30,9 @@ const gridSize = { cols: 20, rows: 20 };
 let food = { x: 10, y: 15 };
 let currentScore = 0;
 const music = new Audio("sounds/asgore_music.mp3")
-music.volume = 0.2
+music.volume = 0.1
 const death = new Audio("sounds/death.mp3")
-music.volume = 0.2
+music.volume = 0.1
 startButton.addEventListener("click", startGame);
 
 
