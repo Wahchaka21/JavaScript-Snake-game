@@ -29,7 +29,10 @@ let gameInterval;
 const gridSize = { cols: 20, rows: 20 };
 let food = { x: 10, y: 15 };
 let currentScore = 0;
-
+const music = new Audio("sounds/asgore_music.mp3")
+music.volume = 0.2
+const death = new Audio("sounds/death.mp3")
+music.volume = 0.2
 startButton.addEventListener("click", startGame);
 
 
@@ -45,9 +48,12 @@ function moveSnake() {
     x: head.x + direction.x,
     y: head.y + direction.y,
   };
-
+  
   if (collisionMur(newHead) || siIlSeToucheCeCon(newHead)) {
     clearInterval(gameInterval);
+    music.pause();
+    music.currentTime = 0;
+    death.play()
 
     const gameOver = document.createElement("div");
     gameOver.className = "gameOver";
@@ -207,4 +213,7 @@ function startGame() {
 
   //console.log("Et paff c'est démarrer !");
   gameInterval = setInterval(moveSnake, 200);
+  death.pause();
+  death.currentTime = 0;
+  music.play()
 }

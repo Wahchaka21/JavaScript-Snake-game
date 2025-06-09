@@ -28,14 +28,14 @@ header p {
 .wife {
   position: absolute;
   top: 350px;
-  left: 20px;
+  left: 100px;
   width: 15%;
 }
 
 .stillWife {
   position: absolute;
   top: 350px;
-  right: 20px;
+  right: 100px;
   width: 15%;
   transform: scaleX(-1);
 }
